@@ -1,8 +1,5 @@
-import { config } from "dotenv";
-config()
+require("dotenv").config();
+const listaclientes = require("./controller/listaclientes")
+// const inserircliente = require("./controller/inserircliente")
 
-import connectDb from "./src/database/db.js"
-
-const variavel = await connectDb.raw("SELECT cd_cliente from dbapiz.tbl_cliente")
-
-console.log(variavel.rows)
+console.log("Backend rodando")
