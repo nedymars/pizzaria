@@ -1,24 +1,19 @@
-const { Client } = require("pg")
-const dotenv = require("dotenv")
-dotenv.config()
+import knex from 'knex';
+import { config } from "dotenv";
+config()
 
-const connectDb = async() => {
-    try {
-        const client = new Client({
-            user: process.env.pguser,
-            host: process.env.pghost,
-            database: process.env.database,
-            password: process.env.pwd,
-            port: process.env.port
-        })
+const connectDb = knex({
+    client: 'pg',
+    connection: {
+      host: process.env.pghost,
+      user: process.env.pguser,
+      password: process.env.pgpwd,
+      database: process.env.pgdatabase,
+    },
+    pool: {
+      min: 1,
+      max: 10,
+    },
+  });
 
-         await client.connect()
-        // const res = await client.query('SELECT 1')
-        // console.log(res)
-        // await client.end()
-    } catch (error) {
-        return console.log("Erro ao conectar o banco de dados: ", error)
-    }
-}
-
-module.exports = connectDb
+  export default connectDb;

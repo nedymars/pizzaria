@@ -1,6 +1,8 @@
-const dotenv = require("dotenv")
-dotenv.config()
+import { config } from "dotenv";
+config()
 
-const connectDb = require("./src/database/db")
+import connectDb from "./src/database/db.js"
 
-connectDb()
+const variavel = await connectDb.raw("SELECT cd_cliente from dbapiz.tbl_cliente")
+
+console.log(variavel.rows)
